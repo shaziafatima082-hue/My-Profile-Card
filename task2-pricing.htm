@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2 - Flexbox vs Grid Pricing</title>
+    
+    <!-- Google Fonts for clean typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ---------- Global Reset ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            padding: 40px 20px;
+            color: #0f172a;
+        }
+
+        /* Main container to hold both versions */
+        .playground {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        /* ---------- Section Headers (for video clarity) ---------- */
+        .section-tag {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section-tag h2 {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .section-tag .badge {
+            display: inline-block;
+            background: #1e293b;
+            color: white;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 6px;
+        }
+        .badge.flex { background: #2563eb; }
+        .badge.grid { background: #16a34a; }
+
+        /* ---------- COMMON STYLES (Cards, Header, Footer) ---------- */
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .pricing-header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .pricing-header p {
+            color: #475569;
+            font-size: 18px;
+            margin-top: 8px;
+        }
+
+        .pricing-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 32px 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column; /* Ensures button stays at bottom */
+        }
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+        .pricing-card.popular {
+            border: 2px solid #2563eb;
+            background: #f8faff;
+            position: relative;
+        }
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2563eb;
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 16px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .pricing-card .plan-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .pricing-card .price {
+            font-size: 42px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+        .pricing-card .price span {
+            font-size: 16px;
+            font-weight: 400;
+            color: #64748b;
+        }
+        .pricing-card .features {
+            list-style: none;
+            margin: 20px 0 30px 0;
+            padding: 0;
+            flex-grow: 1; /* Pushes button down in flex/grid items */
+        }
+        .pricing-card .features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+            font-size: 15px;
+        }
+        .pricing-card .features li:last-child {
+            border-bottom: none;
+        }
+        .btn {
+            background: #f1f5f9;
+            color: #0f172a;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        .pricing-footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid #e2e8f0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* ---------- 1. FLEXBOX VERSION ---------- */
+        .flex-container {
+            display: flex;
+            gap: 24px;
+            align-items: stretch; /* Makes all cards equal height */
+        }
+        .flex-container .pricing-card {
+            flex: 1; /* Each card takes equal space */
+        }
+
+        /* ---------- 2. GRID VERSION ---------- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+            gap: 24px;
+        }
+
+        /* ---------- RESPONSIVENESS (Below 600px - Stack into single column) ---------- */
+        @media (max-width: 600px) {
+            /* Flexbox version stacks */
+            .flex-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .flex-container .pricing-card {
+                flex: unset; /* Remove flex grow */
+                width: 100%;
+            }
+
+            /* Grid version stacks */
+            .grid-container {
+                grid-template-columns: 1fr; /* Single column */
+            }
+
+            /* Adjust font sizes for mobile */
+            .pricing-header h1 {
+                font-size: 28px;
+            }
+            .pricing-card .price {
+                font-size: 34px;
+            }
+            body {
+                padding: 20px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="playground">
+
+    <!-- ============================================ -->
+    <!-- SECTION 1: CSS GRID VERSION (Pehle dikhao) -->
+    <!-- ============================================ -->
+    <section>
+        <div class="section-tag">
+            <h2>Version 1: CSS Grid</h2>
+            <span class="badge grid">⚡ Built with Grid</span>
+        </div>
+
+        <!-- Pricing Header -->
+        <div class="pricing-header">
+            <h1>Choose Your Plan</h1>
+            <p>Pick the perfect tier for your needs. Upgrade anytime.</p>
+        </div>
+
+        <!-- Grid Container -->
+        <div class="grid-container">
+            
+            <!-- Card 1: Basic -->
+            <div class="pricing-card">
+                <h3 class="plan-name">Basic</h3>
+                <div class="price">$10 <span>/mo</span></div>
+                <ul class="features">
+                    <li>1 Project</li>
+                    <li>10GB Storage</li>
+                    <li>Basic Support</li>
+                </ul>
+                <button class="btn">Get Started</button>
+            </div>
+
+            <!-- Card 2: Pro (Popular) -->
+            <div class="pricing-card popular">
+                <span class="popular-badge">🔥 Popular</span>
+                <h3 class="plan-name">Pro</h3>
+                <div class="price">$30 <span>/mo</span></div>
+                <ul class="features">
+                    <li>5 Projects</li>
+                    <li>100GB Storage</li>
+                    <li>Priority Support</li>
+                </ul>
+                <button class="btn btn-primary">Get Started</button>
+            </div>
+
+            <!-- Card 3: Enterprise -->
+            <div class="pricing-card">
+                <h3 class="plan-name">Enterprise</h3>
+                <div class="price">$60 <span>/mo</span></div>
+                <ul class="features">
+                    <li>Unlimited Projects</li>
+                    <li>1TB Storage</li>
+                    <li>24/7 Support</li>
+                </ul>
+                <button class="btn">Get Started</button>
+            </div>
+
+        </div>
+
+        <div class="pricing-footer">
+            © 2026 Shazia's Pricing Lab. All rights reserved.
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION 2: FLEXBOX VERSION (Neechay dikhao) -->
+    <!-- ============================================ -->
+    <section>
+        <div class="section-tag">
+            <h2>Version 2: Flexbox</h2>
+            <span class="badge flex">💪 Built with Flexbox</span>
+        </div>
+
+        <!-- Pricing Header -->
+        <div class="pricing-header">
+            <h1>Choose Your Plan</h1>
+            <p>Pick the perfect tier for your needs. Upgrade anytime.</p>
+        </div>
+
+        <!-- Flex Container -->
+        <div class="flex-container">
+            
+            <!-- Card 1: Basic -->
+            <div class="pricing-card">
+                <h3 class="plan-name">Basic</h3>
+                <div class="price">$10 <span>/mo</span></div>
+                <ul class="features">
+                    <li>1 Project</li>
+                    <li>10GB Storage</li>
+                    <li>Basic Support</li>
+                </ul>
+                <button class="btn">Get Started</button>
+            </div>
+
+            <!-- Card 2: Pro (Popular) -->
+            <div class="pricing-card popular">
+                <span class="popular-badge">🔥 Popular</span>
+                <h3 class="plan-name">Pro</h3>
+                <div class="price">$30 <span>/mo</span></div>
+                <ul class="features">
+                    <li>5 Projects</li>
+                    <li>100GB Storage</li>
+                    <li>Priority Support</li>
+                </ul>
+                <button class="btn btn-primary">Get Started</button>
+            </div>
+
+            <!-- Card 3: Enterprise -->
+            <div class="pricing-card">
+                <h3 class="plan-name">Enterprise</h3>
+                <div class="price">$60 <span>/mo</span></div>
+                <ul class="features">
+                    <li>Unlimited Projects</li>
+                    <li>1TB Storage</li>
+                    <li>24/7 Support</li>
+                </ul>
+                <button class="btn">Get Started</button>
+            </div>
+
+        </div>
+
+        <div class="pricing-footer">
+            © 2026 Shazia's Pricing Lab. All rights reserved.
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
