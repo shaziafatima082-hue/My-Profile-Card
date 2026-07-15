@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Ensures proper scaling on mobile devices (handles 350px requirement) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile Card</title>
+    
+    <!-- Google Fonts for professional font pairing (Poppins for headings, Open Sans for body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome CDN for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Main Card Container - Utilizing semantic HTML5 elements -->
+    <main class="profile-card">
+        
+        <!-- HEADER: Contains profile image, name, and tagline -->
+        <header class="card-header">
+            <img src="images/about-pic.jpg" alt="Profile Photo" class="profile-img">
+            <h1>Shazia Fatima</h1>
+            <p class="tagline">Frontend  Web Development Intern | Creative Thinker</p>
+        </header>
+
+        <!-- SECTION: Semantic element for the biography text -->
+        <section class="card-body">
+            <h2>About Me</h2>
+            <p>
+                Hi, I'm Shazia Fatima! I love turning complex problems into beautiful, interactive web designs. 
+                I believe in writing clean code and learning something new every single day. 
+                Currently exploring the depths of CSS and loving it!
+            </p>
+        </section>
+
+              <!-- FOOTER: Semantic element containing social connection links -->
+        <footer class="card-footer">
+            <h3>Connect with Me</h3>
+            <div class="social-links">
+                <!-- LinkedIn Profile (Correct URL placed in href) -->
+                <a href="https://www.linkedin.com/in/shazia-fatima-435785359/" target="_blank" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                
+                <!-- GitHub Profile (Correct URL placed in href) -->
+                <a href="https://github.com/shaziafatima082-hue" target="_blank" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                
+                <!-- Email (Replaced Twitter since you don't have one - Professional touch) -->
+                <a href="mailto:your-shaziafatima082@gmail.com" target="_blank" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </footer>
+
+    </main>
+
+</body>
+</html>

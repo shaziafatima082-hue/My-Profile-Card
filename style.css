@@ -1,0 +1,157 @@
+/* ---------- 1. Global Reset & Base Configuration ---------- */
+/* Removes default browser margins/paddings and applies border-box consistently */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    /* Gradient background for a modern, vibrant look */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    /* Flexbox is used to center the card perfectly in the viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ---------- 2. Profile Card Core Styling (Box Model in action) ---------- */
+.profile-card {
+    /* Dynamically adjusts width: 90% on small screens, but maxes out at 480px on larger screens (handles both 350px and 500px requirements) */
+    width: min(90%, 480px); 
+    background: #ffffff;
+    border-radius: 24px;      /* Smooth, rounded outer corners */
+    padding: 32px 28px;       /* Internal spacing (Padding) */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30); /* Deep, professional 3D depth */
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+/* Micro-interaction: Card lifts slightly on hover for a polished UX */
+.profile-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.40);
+}
+
+/* ---------- 3. Header Section (Photo & Identity) ---------- */
+.card-header {
+    margin-bottom: 24px;   /* Creates space between header and the bio section */
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;    /* Transforms the square image into a perfect circle */
+    object-fit: cover;     /* Ensures the image covers the area without distortion */
+    border: 4px solid #764ba2;
+    margin-bottom: 16px;   /* Space between the image and the name below */
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif; /* Pairing a distinct heading font with body font */
+    font-weight: 700;
+    font-size: 28px;
+    color: #2d3748;
+    margin-bottom: 4px;
+}
+
+.tagline {
+    font-weight: 600;
+    color: #764ba2;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+/* ---------- 4. Body Section (Biography) ---------- */
+.card-body {
+    margin-bottom: 28px;   /* Separates the bio from the footer section */
+    padding: 0 6px;        /* Prevents text from touching the side edges */
+}
+
+.card-body h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    color: #2d3748;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.card-body p {
+    color: #4a5568;
+    line-height: 1.7;      /* Increases line spacing for better readability */
+    font-size: 15px;
+}
+
+/* ---------- 5. Footer Section (Social Links) ---------- */
+.card-footer h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #a0aec0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+}
+
+.social-links {
+    display: flex;         /* Flexbox is used to align icons horizontally */
+    justify-content: center;
+    gap: 20px;             /* Maintains even spacing between each icon */
+}
+
+.social-links a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;    /* Circular background behind each icon */
+    background: #f7fafc;
+    color: #2d3748;
+    font-size: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Hover state: Transitions to the brand color, providing visual feedback */
+.social-links a:hover {
+    background: #764ba2;
+    color: #ffffff;
+    transform: scale(1.10);
+    box-shadow: 0 8px 15px rgba(118, 75, 162, 0.4);
+}
+
+/* ---------- 6. Responsive Adjustments (Handles the 350px width requirement) ---------- */
+/* When screen width drops below 420px (e.g., small mobile devices like 350px), optimize spacing */
+@media (max-width: 420px) {
+    .profile-card {
+        padding: 24px 16px;   /* Reduces internal padding to fit smaller screens */
+        width: 95%;           
+    }
+
+    h1 {
+        font-size: 22px;      /* Scales down the heading */
+    }
+
+    .profile-img {
+        width: 90px;          /* Scales down the profile image */
+        height: 90px;
+    }
+
+    .card-body p {
+        font-size: 14px;      /* Slightly smaller text for better mobile reading */
+    }
+
+    .social-links a {
+        width: 42px;
+        height: 42px;
+        font-size: 17px;
+    }
+}
+
+/* Note: The "width: min(90%, 480px)" on .profile-card inherently manages the 500px scenario.
+   On a 500px screen, the card renders at approximately 450px (90% of 500), keeping perfect proportions.
+   No additional media query is needed for 500px as the layout remains intact. */
